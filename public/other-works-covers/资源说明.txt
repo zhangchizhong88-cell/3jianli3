@@ -1,0 +1,34 @@
+「其他项目」资源（顺序：cover-01、cover-02… 须连续编号，对应走马灯第 1、2… 张）
+
+运行 npm run dev 或 npm run build 前会自动生成：
+
+  • src/generated/otherWorksCoverUrls.ts      — 走马灯封面路径
+  • src/generated/otherWorksLightboxInner.ts  — 灯箱内页路径（可选）
+
+新增一组：新建文件夹 cover-06（下一个连续编号），放入 cover.* 与可选的 detail.*，再跑 dev/build。勿覆盖已有 cover-XX。
+
+每个子文件夹：
+
+  cover-01  →  第 1 张（数组下标 0）
+  cover-02  →  第 2 张（数组下标 1）
+  …
+
+──────────────── 走马灯 / 灯箱顶图「主封面」（每个文件夹须恰好一种）
+
+脚本按下列优先级只选第一个存在的文件（同目录多种时靠前的优先）：
+
+  cover.png → cover.jpg → cover.jpeg → cover.webp → cover.mp4 → cover.webm → cover.mov
+
+因此：同一格既有 cover.png 又有 cover.mp4 时，外圈走马灯和灯箱顶部都会用静态图，不会被 mp4 顶掉。
+
+──────────────── 灯箱内页（可选）
+
+  • 主内容：detail.png / detail-1.mp4 …（命名规则见下）
+  • 若你放了「补充视频」但误命名为 cover.mp4：与静态 cover 同存时，该视频会自动追加在内页列表末尾（在 detail* 之后）
+  • 更推荐内页视频直接用：detail.mp4 或 detail-2.webm 等，不跟主封面文件名混用
+
+  • 单张：detail.png / detail.jpg / detail.webp / detail.mp4 …
+  • 多张（自上而下无缝拼接）：detail-1.png、detail-2.png … 或 detail_01.mp4 …
+  • 若同时有 detail.* 与 detail-1.*，不带数字的 detail.* 会排在最上面
+
+无需改 TypeScript，换资源后重新 dev/build 即可。
