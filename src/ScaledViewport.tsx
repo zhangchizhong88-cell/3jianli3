@@ -17,16 +17,24 @@ export function ScaledViewport({ children }: { children: ReactNode }) {
     const inner = innerRef.current;
     if (!inner) return;
 
+    let rafId = 0;
     const update = () => {
-      setContentHeight(inner.scrollHeight);
+      const next = inner.scrollHeight;
+      setContentHeight((prev) => (prev === next ? prev : next));
+    };
+    const scheduleUpdate = () => {
+      if (rafId) return;
+      rafId = window.requestAnimationFrame(() => {
+        rafId = 0;
+        update();
+      });
     };
 
     update();
-    window.addEventListener("resize", update);
-    const ro = new ResizeObserver(update);
+    const ro = new ResizeObserver(scheduleUpdate);
     ro.observe(inner);
     return () => {
-      window.removeEventListener("resize", update);
+      if (rafId) window.cancelAnimationFrame(rafId);
       ro.disconnect();
     };
   }, [scale, children]);
