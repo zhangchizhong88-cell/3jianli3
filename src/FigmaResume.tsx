@@ -124,7 +124,7 @@ export function FigmaResumeLayout({ onOpenCase }: FigmaResumeLayoutProps) {
         <HeroSection />
         <div
           id="section-about"
-          className="relative z-20 shrink-0 scroll-mt-[80px] bg-[#0a0a0a] h-[1498px] w-full"
+          className="cv-auto relative z-20 shrink-0 scroll-mt-[80px] bg-[#0a0a0a] h-[1498px] w-full"
           data-node-id="1136:130"
           data-name="About"
         >
@@ -284,7 +284,7 @@ export function FigmaResumeLayout({ onOpenCase }: FigmaResumeLayoutProps) {
         </div>
         <div
           ref={whatIDoRef}
-          className="relative z-20 shrink-0 bg-[#0a0a0a] h-[1795px] w-full"
+          className="cv-auto relative z-20 shrink-0 bg-[#0a0a0a] h-[1795px] w-full"
           data-node-id="1136:175"
           data-name="能力介绍"
         >
@@ -531,7 +531,7 @@ export function FigmaResumeLayout({ onOpenCase }: FigmaResumeLayoutProps) {
         </div>
         <div
           id="section-projects"
-          className="relative z-20 shrink-0 scroll-mt-[80px] overflow-clip bg-[#0a0a0a] h-[3353px] w-full"
+          className="cv-auto relative z-20 shrink-0 scroll-mt-[80px] overflow-clip bg-[#0a0a0a] h-[3353px] w-full"
           data-node-id="1136:272"
           data-name="Projects"
         >
@@ -863,7 +863,7 @@ export function FigmaResumeLayout({ onOpenCase }: FigmaResumeLayoutProps) {
           </div>
         </div>
         <div
-          className="relative z-20 shrink-0 overflow-hidden bg-[#0a0a0a] h-[1200px] w-full"
+          className="cv-auto relative z-20 shrink-0 overflow-hidden bg-[#0a0a0a] h-[1200px] w-full"
           data-node-id="1136:362"
           data-name="其他项目"
         >
@@ -921,7 +921,7 @@ export function FigmaResumeLayout({ onOpenCase }: FigmaResumeLayoutProps) {
           </div>
           <OtherWorksStackSection />
         </div>
-        <div className="relative z-20 shrink-0 overflow-clip bg-[#0a0a0a] h-[923px] w-full" data-node-id="1136:392" data-name="底部">
+        <div className="cv-auto relative z-20 shrink-0 overflow-clip bg-[#0a0a0a] h-[923px] w-full" data-node-id="1136:392" data-name="底部">
           {!isCoarsePointer ? <FooterWindParticles /> : null}
           <div className="absolute h-[423px] left-[20px] top-[450px] w-[1880px]" data-node-id="1168:495">
             <div className="absolute bottom-0 h-[41px] left-0 overflow-clip w-[1880px]" data-node-id="1136:426" data-name="Footer">

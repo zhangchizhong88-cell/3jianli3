@@ -95,6 +95,17 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/*
+ * 长页面分段渲染：离屏区块交给浏览器延迟绘制，降低 iOS 快速滚动时内存峰值。
+ * 仅作为性能兜底，不影响结构与可访问性。
+ */
+@supports (content-visibility: auto) {
+  .cv-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: 1200px;
+  }
+}
+
 /* What I Do 工具带：无缝跑马灯（轨道为两段相同内容，translate -50% 循环） */
 @keyframes tools-marquee {
   from {
