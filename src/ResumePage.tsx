@@ -23,7 +23,11 @@ export function ResumePage({ onOpenCase, suppressHeroChrome }: ResumePageProps) 
       {!isCoarsePointer ? <LoadingSplash /> : null}
       {!suppressHeroChrome ? (
         <>
-          <StickyHeroBrand logoSrc={heroBrandLogoSrc} scaleMultiplier={isCoarsePointer ? 0.5 : 1} />
+          <StickyHeroBrand
+            logoSrc={heroBrandLogoSrc}
+            scaleMultiplier={isCoarsePointer ? 0.5 : 1}
+            fixedScale={isCoarsePointer ? 0.5 : undefined}
+          />
           {!isCoarsePointer ? <StickyHeroMenu /> : null}
         </>
       ) : null}
