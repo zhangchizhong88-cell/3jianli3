@@ -515,41 +515,64 @@ ${disableRotorAnimation ? "" : `
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: keyframesCss }} />
-      <div
-        className="ow-fan-viewport -translate-x-1/2 absolute left-[calc(50%+0.5px)] top-[400px] h-[715.154px] w-[2379px] overflow-visible"
-        data-node-id="1167:448"
-      >
-        <div className="ow-fan-stage relative h-full w-full overflow-visible">
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-24 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/70 to-transparent" />
-          <div className="relative z-[1] h-full w-full overflow-visible">
-            <div
-              className={`${rotorClass} pointer-events-auto absolute left-1/2 w-0 -translate-x-1/2`}
-              style={{
-                top: F.fanCenterY,
-                height: 0,
-              }}
-            >
-              {Array.from({ length: panelCount }, (_, k) => {
-                const angle = k * angleStep;
-                const imgIdx = fanPanelImgIdx[k] ?? k % n;
-                const src = OTHER_WORKS_COVER_URLS[imgIdx];
-                return (
-                  <OwFanCard
-                    key={k}
-                    angle={angle}
-                    arcRadius={F.arcRadius}
-                    cardW={F.cardW}
-                    cardH={F.cardH}
-                    src={src}
-                    openAriaLabel={`查看其他项目封面 ${imgIdx + 1}`}
-                    onOpen={() => openAt(imgIdx)}
-                  />
-                );
-              })}
+      {isCoarsePointer ? (
+        <div
+          className="-translate-x-1/2 absolute left-1/2 top-[410px] z-[1] w-[2379px]"
+          data-node-id="1167:448"
+        >
+          <div className="mx-auto flex w-[1900px] gap-8 overflow-x-auto px-10 pb-4 pt-2">
+            {OTHER_WORKS_COVER_URLS.map((src, i) => (
+              <button
+                key={`${i}-${src}`}
+                type="button"
+                className="shrink-0 overflow-hidden rounded-[8px] border-0 p-0"
+                onClick={() => openAt(i)}
+                aria-label={`查看其他项目封面 ${i + 1}`}
+              >
+                <div className="h-[317px] w-[563px]">
+                  <OtherWorksCoverMedia src={src} variant="fan-card" />
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <div
+          className="ow-fan-viewport -translate-x-1/2 absolute left-[calc(50%+0.5px)] top-[400px] h-[715.154px] w-[2379px] overflow-visible"
+          data-node-id="1167:448"
+        >
+          <div className="ow-fan-stage relative h-full w-full overflow-visible">
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-24 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/70 to-transparent" />
+            <div className="relative z-[1] h-full w-full overflow-visible">
+              <div
+                className={`${rotorClass} pointer-events-auto absolute left-1/2 w-0 -translate-x-1/2`}
+                style={{
+                  top: F.fanCenterY,
+                  height: 0,
+                }}
+              >
+                {Array.from({ length: panelCount }, (_, k) => {
+                  const angle = k * angleStep;
+                  const imgIdx = fanPanelImgIdx[k] ?? k % n;
+                  const src = OTHER_WORKS_COVER_URLS[imgIdx];
+                  return (
+                    <OwFanCard
+                      key={k}
+                      angle={angle}
+                      arcRadius={F.arcRadius}
+                      cardW={F.cardW}
+                      cardH={F.cardH}
+                      src={src}
+                      openAriaLabel={`查看其他项目封面 ${imgIdx + 1}`}
+                      onOpen={() => openAt(imgIdx)}
+                    />
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
       {lightbox}
     </>
   );
