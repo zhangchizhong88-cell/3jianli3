@@ -11,13 +11,15 @@ const DESIGN_WIDTH = 1920;
 
 type Props = {
   logoSrc: string;
+  /** 额外缩放系数（用于移动端压缩视觉尺寸） */
+  scaleMultiplier?: number;
 };
 
 /**
  * 0–200px 滚动：`scale` 从 1 线性到 {@link SCALE_END}（整行高约 50px）。
  * Portal + fixed：画布在 {@link ScaledViewport} 内带 scale，顶栏需挂 body 才能相对视口固定。
  */
-export function StickyHeroBrand({ logoSrc }: Props) {
+export function StickyHeroBrand({ logoSrc, scaleMultiplier = 1 }: Props) {
   const d = useViewportDesignScale();
   const [scrollY, setScrollY] = useState(0);
   const [mounted, setMounted] = useState(false);
@@ -38,7 +40,7 @@ export function StickyHeroBrand({ logoSrc }: Props) {
   const topPx = DESIGN_INSET * d;
 
   const p = Math.min(Math.max(scrollY / SCROLL_RANGE, 0), 1);
-  const scale = 1 + (SCALE_END - 1) * p;
+  const scale = (1 + (SCALE_END - 1) * p) * scaleMultiplier;
 
   return createPortal(
     <div

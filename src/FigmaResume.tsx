@@ -45,7 +45,7 @@ const imgFrame5 = "/figma-assets/707bff00-da16-446e-b732-737d1629bf98.svg";
 const imgFrame6 = "/figma-assets/a92d88ad-77c9-49f4-a8fd-43a8a89ff441.svg";
 const imgFrame7 = "/figma-assets/4bb9eb0a-075b-40da-bcb3-fde6205c2923.svg";
 const imgUnion3 = "/figma-assets/71b0d287-ab98-4384-ba18-748c62545c0f.svg";
-const imgHeroStatic = "/images/hero-artwork.jpg";
+const imgHeroStatic = "/images/mobile-hero-bottom.png";
 
 /** 块是否与视口有交集（不用 IO：祖先 `overflow-x-clip` 等会导致 IO 误判） */
 function isBlockInViewport(el: HTMLElement) {

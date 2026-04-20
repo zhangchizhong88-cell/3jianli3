@@ -3,7 +3,7 @@ import { HeroMuxBackground } from "./HeroMuxBackground";
 import { useIsCoarsePointer } from "./useIsCoarsePointer";
 
 const videoHeroLoop = "/videos/hero-loop.mp4";
-const imgHeroStatic = "/images/hero-artwork.jpg";
+const imgHeroStatic = "/images/mobile-hero-top.png";
 const imgFrame =
   "/figma-assets/8b831903-dfc9-4c18-8dbf-73161ed106fe.svg";
 const imgFrame1 =
