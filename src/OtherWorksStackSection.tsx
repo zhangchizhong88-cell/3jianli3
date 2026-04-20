@@ -520,7 +520,7 @@ ${disableRotorAnimation ? "" : `
           className="-translate-x-1/2 absolute left-1/2 top-[410px] z-[1] w-[2379px]"
           data-node-id="1167:448"
         >
-          <div className="mx-auto flex w-[1900px] gap-8 overflow-x-auto px-10 pb-4 pt-2">
+          <div className="mx-auto flex w-[1900px] gap-[42px] overflow-x-auto px-10 pb-4 pt-2">
             {OTHER_WORKS_COVER_URLS.map((src, i) => (
               <button
                 key={`${i}-${src}`}
@@ -529,7 +529,7 @@ ${disableRotorAnimation ? "" : `
                 onClick={() => openAt(i)}
                 aria-label={`查看其他项目封面 ${i + 1}`}
               >
-                <div className="h-[317px] w-[563px]">
+                <div className="h-[396px] w-[704px]">
                   <OtherWorksCoverMedia src={src} variant="fan-card" />
                 </div>
               </button>
