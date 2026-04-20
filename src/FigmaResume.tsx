@@ -45,6 +45,7 @@ const imgFrame5 = "/figma-assets/707bff00-da16-446e-b732-737d1629bf98.svg";
 const imgFrame6 = "/figma-assets/a92d88ad-77c9-49f4-a8fd-43a8a89ff441.svg";
 const imgFrame7 = "/figma-assets/4bb9eb0a-075b-40da-bcb3-fde6205c2923.svg";
 const imgUnion3 = "/figma-assets/71b0d287-ab98-4384-ba18-748c62545c0f.svg";
+const imgHeroStatic = "/images/hero-artwork.jpg";
 
 /** 块是否与视口有交集（不用 IO：祖先 `overflow-x-clip` 等会导致 IO 误判） */
 function isBlockInViewport(el: HTMLElement) {
@@ -485,7 +486,11 @@ export function FigmaResumeLayout({ onOpenCase }: FigmaResumeLayoutProps) {
                   className="pointer-events-none absolute inset-0 h-full w-full object-cover transform-gpu"
                 />
               ) : (
-                <div className="absolute inset-0 bg-[#0a0a0a]" />
+                <img
+                  alt=""
+                  src={imgHeroStatic}
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
               )}
             </div>
           </div>
@@ -864,9 +869,9 @@ export function FigmaResumeLayout({ onOpenCase }: FigmaResumeLayoutProps) {
         </div>
         {isCoarsePointer ? (
           <div
-            className="cv-auto relative z-20 shrink-0 overflow-hidden bg-[#0a0a0a] h-[360px] w-full"
+            className="cv-auto relative z-20 shrink-0 overflow-hidden bg-[#0a0a0a] h-[1200px] w-full"
             data-node-id="1136:362"
-            data-name="其他项目(移动端轻量模式)"
+            data-name="其他项目"
           >
             <div className="absolute h-[64px] left-[20px] top-[24px] w-[1880px]" data-node-id="1165:392" data-name="页眉">
               <div className="absolute h-[21px] left-[280px] top-0 w-[1600px]" data-node-id="1165:393" data-name="Union">
@@ -892,12 +897,33 @@ export function FigmaResumeLayout({ onOpenCase }: FigmaResumeLayoutProps) {
                 <p className="leading-[23.4px]">VIEW WORK</p>
               </div>
             </div>
-            <div className="absolute left-[280px] top-[126px] w-[1360px]">
-              <p className="font-monumentUltra text-[72px] leading-[78px] text-white whitespace-pre-wrap">{`Other\n//  Creative Works`}</p>
-              <p className="mt-6 font-['PingFang_SC:Regular',sans-serif] text-[24px] leading-[36px] text-white/70">
-                移动端已切换稳定模式（关闭高负载 3D 动画），避免 iOS 快速滑动崩溃。
-              </p>
+            <div
+              ref={otherWorksTitlesRef}
+              className="absolute h-[200px] overflow-visible left-[280px] top-[144px] w-[1239px]"
+              data-node-id="1165:405"
+              data-name="标题"
+            >
+              <div className="-translate-y-1/2 absolute flex flex-col font-monumentUltra justify-center leading-[0] left-0 not-italic text-[100px] text-white top-[50px] w-[852px]" data-node-id="1165:406">
+                <p
+                  className={`leading-[100px] about-hero-line-in ${otherWorksTitlesVisible ? "about-hero-line-in--run" : ""}`}
+                >
+                  Other
+                </p>
+              </div>
+              <div className="-translate-y-1/2 absolute flex flex-col font-monumentUltra justify-center leading-[0] left-0 not-italic text-[100px] text-white top-[150px] w-[1270px]" data-node-id="1165:407">
+                <p
+                  className={`leading-[100px] whitespace-pre-wrap about-hero-line-in about-hero-line-in--delay ${otherWorksTitlesVisible ? "about-hero-line-in--run" : ""}`}
+                >{`//  Creative Works`}</p>
+              </div>
+              <div
+                className={`absolute left-[1446px] size-[74px] top-[113px] about-hero-line-in about-hero-line-in--delay2 ${otherWorksTitlesVisible ? "about-hero-line-in--run" : ""}`}
+                data-node-id="1165:434"
+                data-name="Frame"
+              >
+                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgFrame7} />
+              </div>
             </div>
+            <OtherWorksStackSection />
           </div>
         ) : (
           <div

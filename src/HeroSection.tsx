@@ -3,6 +3,7 @@ import { HeroMuxBackground } from "./HeroMuxBackground";
 import { useIsCoarsePointer } from "./useIsCoarsePointer";
 
 const videoHeroLoop = "/videos/hero-loop.mp4";
+const imgHeroStatic = "/images/hero-artwork.jpg";
 const imgFrame =
   "/figma-assets/8b831903-dfc9-4c18-8dbf-73161ed106fe.svg";
 const imgFrame1 =
@@ -30,7 +31,11 @@ export function HeroSection() {
             {!isCoarsePointer ? (
               <HeroMuxBackground className="pointer-events-none absolute inset-0 h-full w-full object-cover transform-gpu" />
             ) : (
-              <div className="absolute inset-0 bg-[#0a0a0a]" />
+              <img
+                alt=""
+                src={imgHeroStatic}
+                className="absolute inset-0 h-full w-full object-cover"
+              />
             )}
           </div>
           <div className="absolute bg-gradient-to-b from-[rgba(10,10,10,0)] inset-0 to-[#0a0a0a]" />
