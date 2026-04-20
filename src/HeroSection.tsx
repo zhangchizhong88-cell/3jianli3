@@ -14,6 +14,7 @@ const imgUnion =
   "/figma-assets/b1b749d8-5678-48cd-b721-037039fe6398.svg";
 const imgEllipse3 =
   "/figma-assets/4aeeea71-5a76-4f6e-88a0-50a2571fe37f.svg";
+const imgHeroBrandLogo = "/figma-assets/9a594177-70cc-4dbd-83e4-3d2ffa31e025.png";
 
 /** 头图画布（设计坐标 1920×1100），随页面在 {@link ScaledViewport} 内自然滚动；顶栏见 {@link StickyHeroBrand} / {@link StickyHeroMenu} */
 export function HeroSection() {
@@ -45,6 +46,22 @@ export function HeroSection() {
         className="absolute bg-gradient-to-b from-[rgba(10,10,10,0)] h-[1100px] left-0 to-[#0a0a0a] top-0 w-[1920px]"
         data-node-id="1165:439"
       />
+      {isCoarsePointer ? (
+        <div
+          className="absolute left-[50px] top-[50px] origin-top-left scale-50"
+          aria-label="Cian Zhang Design"
+        >
+          <div className="flex h-[96px] w-[520px] items-center gap-8 text-white">
+            <div className="relative size-24 shrink-0 overflow-hidden rounded-md">
+              <img alt="" className="h-full w-full object-cover" src={imgHeroBrandLogo} />
+            </div>
+            <div className="font-monumentUltra text-[40px] leading-[0.92]">
+              <p className="mb-0 whitespace-pre">{`Cian Zhang `}</p>
+              <p className="whitespace-pre">Design</p>
+            </div>
+          </div>
+        </div>
+      ) : null}
       <div className="absolute contents right-[50px] top-[686px]" data-node-id="1164:7">
         <div
           className="absolute h-[172px] right-[50px] top-[686px] w-[891px]"
