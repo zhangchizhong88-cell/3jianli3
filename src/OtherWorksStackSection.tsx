@@ -298,15 +298,29 @@ function OwFanCard({
 export function OtherWorksStackSection() {
   const uid = useId().replace(/:/g, "");
   const n = OTHER_WORKS_COVER_URLS.length;
+  const [isCoarsePointer, setIsCoarsePointer] = useState(false);
+  useEffect(() => {
+    if (typeof window === "undefined" || typeof window.matchMedia !== "function") return;
+    const mq = window.matchMedia("(pointer: coarse)");
+    const update = () => setIsCoarsePointer(mq.matches);
+    update();
+    mq.addEventListener?.("change", update);
+    return () => mq.removeEventListener?.("change", update);
+  }, []);
+
   const maxByGeometry = otherWorksFanMaxPanels(
     F.cardW,
     F.arcRadius,
     F.panelChordGapFactor,
   );
-  const panelCount = Math.max(
+  const basePanelCount = Math.max(
     F.panelCountMin,
     Math.min(F.panelCountMax, maxByGeometry),
   );
+  /** 移动端降低同屏合成负载，避免快速滑动时浏览器触发整页重载 */
+  const panelCount = isCoarsePointer
+    ? Math.max(F.panelCountMin, Math.min(10, basePanelCount))
+    : basePanelCount;
   const angleStep = 360 / panelCount;
 
   const fanPanelImgIdx = useMemo(
@@ -321,6 +335,7 @@ export function OtherWorksStackSection() {
     () => {
       const a0 = F.initialAnimOffsetDeg;
       const a1 = F.initialAnimOffsetDeg - 360;
+      const disableRotorAnimation = isCoarsePointer;
       return `
 @keyframes ${animName} {
   from { transform: rotate(${a0}deg); }
@@ -328,13 +343,16 @@ export function OtherWorksStackSection() {
 }
 .${rotorClass} {
   transform-origin: center center;
-  animation: ${animName} ${F.loopMs}ms linear infinite;
+  transform: rotate(${a0}deg);
+  animation: ${disableRotorAnimation ? "none" : `${animName} ${F.loopMs}ms linear infinite`};
   will-change: transform;
 }
+${disableRotorAnimation ? "" : `
 .ow-fan-stage:has(.ow-fan-panel:hover) .${rotorClass},
 .ow-fan-stage:has(.ow-fan-panel:focus-within) .${rotorClass} {
   animation-play-state: paused;
 }
+`}
 @media (prefers-reduced-motion: reduce) {
   .${rotorClass} {
     animation: none !important;
@@ -343,7 +361,7 @@ export function OtherWorksStackSection() {
 }
 `;
     },
-    [animName, rotorClass, uid, F.loopMs, F.initialAnimOffsetDeg],
+    [animName, rotorClass, uid, F.loopMs, F.initialAnimOffsetDeg, isCoarsePointer],
   );
 
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
