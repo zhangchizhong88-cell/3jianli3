@@ -91,6 +91,8 @@ body {
   background: #0a0a0a;
   color: #fff;
   -webkit-font-smoothing: antialiased;
+  /* 移动端防止下拉触发浏览器整页刷新（表现为“滑动就反复加载”） */
+  overscroll-behavior-y: none;
 }
 
 /* What I Do 工具带：无缝跑马灯（轨道为两段相同内容，translate -50% 循环） */

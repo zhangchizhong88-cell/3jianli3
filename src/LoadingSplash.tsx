@@ -4,6 +4,7 @@ import { startHeroMuxPreload } from "./warmHeroMuxPreload";
 
 const SPLASH_IMG = "/splash-loading-mark.png";
 const HERO_LOOP_MP4 = "/videos/hero-loop.mp4";
+const SPLASH_SEEN_KEY = "resume_splash_seen_v1";
 /** 至少展示时长，避免 `load` 过快时看不到动效 */
 const MIN_VISIBLE_MS = 1100;
 /**
@@ -21,7 +22,10 @@ export function LoadingSplash() {
   const [mounted, setMounted] = useState(false);
   const [pct, setPct] = useState(0);
   const [exiting, setExiting] = useState(false);
-  const [gone, setGone] = useState(false);
+  const [gone, setGone] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.sessionStorage.getItem(SPLASH_SEEN_KEY) === "1";
+  });
   const startRef = useRef(0);
 
   useLayoutEffect(() => {
@@ -92,7 +96,10 @@ export function LoadingSplash() {
       aria-busy={!exiting}
       aria-label="页面加载中"
       onTransitionEnd={(e) => {
-        if (e.propertyName === "opacity" && exiting) setGone(true);
+        if (e.propertyName === "opacity" && exiting) {
+          window.sessionStorage.setItem(SPLASH_SEEN_KEY, "1");
+          setGone(true);
+        }
       }}
     >
       <div className="flex h-full min-h-0 flex-col">
