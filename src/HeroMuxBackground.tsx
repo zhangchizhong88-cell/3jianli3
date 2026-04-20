@@ -14,6 +14,7 @@ type Props = {
 export function HeroMuxBackground({ className, hlsUrl = MUX_HERO_HLS_URL }: Props) {
   const ref = useRef<HTMLVideoElement>(null);
   const hlsRef = useRef<HlsType | null>(null);
+  const visibleRef = useRef(true);
 
   useEffect(() => {
     const video = ref.current;
@@ -31,7 +32,7 @@ export function HeroMuxBackground({ className, hlsUrl = MUX_HERO_HLS_URL }: Prop
 
     if (canNativeHls) {
       video.src = hlsUrl;
-      void video.play().catch(() => {});
+      if (visibleRef.current) void video.play().catch(() => {});
       return () => {
         video.removeAttribute("src");
         video.load();
@@ -59,11 +60,11 @@ export function HeroMuxBackground({ className, hlsUrl = MUX_HERO_HLS_URL }: Prop
           if (maxIdx >= 0) {
             instance.currentLevel = maxIdx;
           }
-          void el.play().catch(() => {});
+          if (visibleRef.current) void el.play().catch(() => {});
         });
       } else {
         el.src = hlsUrl;
-        void el.play().catch(() => {});
+        if (visibleRef.current) void el.play().catch(() => {});
       }
     });
 
@@ -76,6 +77,25 @@ export function HeroMuxBackground({ className, hlsUrl = MUX_HERO_HLS_URL }: Prop
     };
   }, [hlsUrl]);
 
+  useEffect(() => {
+    const video = ref.current;
+    if (!video || typeof IntersectionObserver === "undefined") return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const visible = Boolean(entry?.isIntersecting);
+        visibleRef.current = visible;
+        if (visible) {
+          void video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.08 },
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <video
       ref={ref}
@@ -84,7 +104,7 @@ export function HeroMuxBackground({ className, hlsUrl = MUX_HERO_HLS_URL }: Prop
       muted
       loop
       playsInline
-      preload="auto"
+      preload="metadata"
       aria-hidden
     />
   );
