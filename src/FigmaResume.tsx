@@ -862,13 +862,13 @@ export function FigmaResumeLayout({ onOpenCase }: FigmaResumeLayoutProps) {
             </div>
           </div>
         </div>
-        <div
-          className="cv-auto relative z-20 shrink-0 overflow-hidden bg-[#0a0a0a] h-[1200px] w-full"
-          data-node-id="1136:362"
-          data-name="其他项目"
-        >
-          <div className="absolute h-[344px] left-[20px] top-0 w-[1880px]" data-node-id="1165:411">
-            <div className="absolute h-[64px] left-0 top-0 w-[1880px]" data-node-id="1165:392" data-name="页眉">
+        {isCoarsePointer ? (
+          <div
+            className="cv-auto relative z-20 shrink-0 overflow-hidden bg-[#0a0a0a] h-[360px] w-full"
+            data-node-id="1136:362"
+            data-name="其他项目(移动端轻量模式)"
+          >
+            <div className="absolute h-[64px] left-[20px] top-[24px] w-[1880px]" data-node-id="1165:392" data-name="页眉">
               <div className="absolute h-[21px] left-[280px] top-0 w-[1600px]" data-node-id="1165:393" data-name="Union">
                 <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgUnion2} />
               </div>
@@ -892,35 +892,74 @@ export function FigmaResumeLayout({ onOpenCase }: FigmaResumeLayoutProps) {
                 <p className="leading-[23.4px]">VIEW WORK</p>
               </div>
             </div>
-            <div
-              ref={otherWorksTitlesRef}
-              className="absolute h-[200px] overflow-visible left-[280px] top-[144px] w-[1239px]"
-              data-node-id="1165:405"
-              data-name="标题"
-            >
-              <div className="-translate-y-1/2 absolute flex flex-col font-monumentUltra justify-center leading-[0] left-0 not-italic text-[100px] text-white top-[50px] w-[852px]" data-node-id="1165:406">
-                <p
-                  className={`leading-[100px] about-hero-line-in ${otherWorksTitlesVisible ? "about-hero-line-in--run" : ""}`}
-                >
-                  Other
-                </p>
-              </div>
-              <div className="-translate-y-1/2 absolute flex flex-col font-monumentUltra justify-center leading-[0] left-0 not-italic text-[100px] text-white top-[150px] w-[1270px]" data-node-id="1165:407">
-                <p
-                  className={`leading-[100px] whitespace-pre-wrap about-hero-line-in about-hero-line-in--delay ${otherWorksTitlesVisible ? "about-hero-line-in--run" : ""}`}
-                >{`//  Creative Works`}</p>
-              </div>
-              <div
-                className={`absolute left-[1446px] size-[74px] top-[113px] about-hero-line-in about-hero-line-in--delay2 ${otherWorksTitlesVisible ? "about-hero-line-in--run" : ""}`}
-                data-node-id="1165:434"
-                data-name="Frame"
-              >
-                <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgFrame7} />
-              </div>
+            <div className="absolute left-[280px] top-[126px] w-[1360px]">
+              <p className="font-monumentUltra text-[72px] leading-[78px] text-white whitespace-pre-wrap">{`Other\n//  Creative Works`}</p>
+              <p className="mt-6 font-['PingFang_SC:Regular',sans-serif] text-[24px] leading-[36px] text-white/70">
+                移动端已切换稳定模式（关闭高负载 3D 动画），避免 iOS 快速滑动崩溃。
+              </p>
             </div>
           </div>
-          <OtherWorksStackSection />
-        </div>
+        ) : (
+          <div
+            className="cv-auto relative z-20 shrink-0 overflow-hidden bg-[#0a0a0a] h-[1200px] w-full"
+            data-node-id="1136:362"
+            data-name="其他项目"
+          >
+            <div className="absolute h-[344px] left-[20px] top-0 w-[1880px]" data-node-id="1165:411">
+              <div className="absolute h-[64px] left-0 top-0 w-[1880px]" data-node-id="1165:392" data-name="页眉">
+                <div className="absolute h-[21px] left-[280px] top-0 w-[1600px]" data-node-id="1165:393" data-name="Union">
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgUnion2} />
+                </div>
+                <div className="absolute content-stretch flex gap-[20px] items-center left-[280px] top-[40px]" data-node-id="1165:398">
+                  <div className="relative shrink-0 size-[4px]" data-node-id="1165:399">
+                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse3} />
+                  </div>
+                  <div className="flex flex-col font-['PingFang_SC:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[20px] text-center text-white tracking-[-0.72px] whitespace-nowrap" data-node-id="1165:400">
+                    <p className="leading-[23.4px]">00.5</p>
+                  </div>
+                </div>
+                <div className="absolute content-stretch flex gap-[20px] items-center left-[843px] top-[40px]" data-node-id="1165:401">
+                  <div className="relative shrink-0 size-[4px]" data-node-id="1165:402">
+                    <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgEllipse3} />
+                  </div>
+                  <div className="flex flex-col font-['PingFang_SC:Regular',sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-[20px] text-center text-white tracking-[-0.72px] whitespace-nowrap" data-node-id="1165:403">
+                    <p className="leading-[23.4px] whitespace-pre">{`Other  Creative Works`}</p>
+                  </div>
+                </div>
+                <div className="-translate-y-1/2 absolute flex flex-col font-['PingFang_SC:Regular',sans-serif] justify-center leading-[0] not-italic right-0 text-[20px] text-right text-white top-[52px] tracking-[-0.72px] whitespace-nowrap" data-node-id="1165:404">
+                  <p className="leading-[23.4px]">VIEW WORK</p>
+                </div>
+              </div>
+              <div
+                ref={otherWorksTitlesRef}
+                className="absolute h-[200px] overflow-visible left-[280px] top-[144px] w-[1239px]"
+                data-node-id="1165:405"
+                data-name="标题"
+              >
+                <div className="-translate-y-1/2 absolute flex flex-col font-monumentUltra justify-center leading-[0] left-0 not-italic text-[100px] text-white top-[50px] w-[852px]" data-node-id="1165:406">
+                  <p
+                    className={`leading-[100px] about-hero-line-in ${otherWorksTitlesVisible ? "about-hero-line-in--run" : ""}`}
+                  >
+                    Other
+                  </p>
+                </div>
+                <div className="-translate-y-1/2 absolute flex flex-col font-monumentUltra justify-center leading-[0] left-0 not-italic text-[100px] text-white top-[150px] w-[1270px]" data-node-id="1165:407">
+                  <p
+                    className={`leading-[100px] whitespace-pre-wrap about-hero-line-in about-hero-line-in--delay ${otherWorksTitlesVisible ? "about-hero-line-in--run" : ""}`}
+                  >{`//  Creative Works`}</p>
+                </div>
+                <div
+                  className={`absolute left-[1446px] size-[74px] top-[113px] about-hero-line-in about-hero-line-in--delay2 ${otherWorksTitlesVisible ? "about-hero-line-in--run" : ""}`}
+                  data-node-id="1165:434"
+                  data-name="Frame"
+                >
+                  <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgFrame7} />
+                </div>
+              </div>
+            </div>
+            <OtherWorksStackSection />
+          </div>
+        )}
         <div className="cv-auto relative z-20 shrink-0 overflow-clip bg-[#0a0a0a] h-[923px] w-full" data-node-id="1136:392" data-name="底部">
           {!isCoarsePointer ? <FooterWindParticles /> : null}
           <div className="absolute h-[423px] left-[20px] top-[450px] w-[1880px]" data-node-id="1168:495">
