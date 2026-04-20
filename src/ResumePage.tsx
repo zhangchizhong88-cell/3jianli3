@@ -4,6 +4,7 @@ import { ScaledViewport } from "./ScaledViewport";
 import { StickyHeroBrand } from "./StickyHeroBrand";
 import { StickyHeroMenu } from "./StickyHeroMenu";
 import type { CaseSlug } from "./caseStudy";
+import { useIsCoarsePointer } from "./useIsCoarsePointer";
 
 type ResumePageProps = {
   onOpenCase: (slug: CaseSlug) => void;
@@ -16,10 +17,11 @@ type ResumePageProps = {
  * {@link ViewportScaleProvider} 由 {@link App} 包裹，便于内页叠层与简历共用缩放且保持简历挂载。
  */
 export function ResumePage({ onOpenCase, suppressHeroChrome }: ResumePageProps) {
+  const isCoarsePointer = useIsCoarsePointer();
   return (
     <>
-      <LoadingSplash />
-      {!suppressHeroChrome ? (
+      {!isCoarsePointer ? <LoadingSplash /> : null}
+      {!suppressHeroChrome && !isCoarsePointer ? (
         <>
           <StickyHeroBrand logoSrc={heroBrandLogoSrc} />
           <StickyHeroMenu />

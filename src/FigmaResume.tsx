@@ -17,6 +17,7 @@ import { RevealStaggerInner } from "./RevealStaggerInner";
 import { OtherWorksStackSection } from "./OtherWorksStackSection";
 import { ToolsMarquee } from "./ToolsMarquee";
 import { MUX_SECTION_BANNER_HLS_URL } from "./muxSectionBannerHlsUrl";
+import { useIsCoarsePointer } from "./useIsCoarsePointer";
 const img3A0EHj2RSo7Y4SURxWKxLmH53UWebp = "/figma-assets/9a594177-70cc-4dbd-83e4-3d2ffa31e025.png";
 export const heroBrandLogoSrc = img3A0EHj2RSo7Y4SURxWKxLmH53UWebp;
 const imgAbout = "/figma-assets/9ece34bf-58c8-4661-8350-6f0391f18134.png";
@@ -93,6 +94,7 @@ type FigmaResumeLayoutProps = {
 };
 
 export function FigmaResumeLayout({ onOpenCase }: FigmaResumeLayoutProps) {
+  const isCoarsePointer = useIsCoarsePointer();
   const onCaseCardKey = (slug: CaseSlug) => (e: KeyboardEvent<HTMLElement>) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
@@ -477,10 +479,14 @@ export function FigmaResumeLayout({ onOpenCase }: FigmaResumeLayoutProps) {
         <div className="h-[600px] relative shrink-0 w-[1920px]" data-node-id="1164:266">
           <div className="-translate-x-1/2 absolute h-[600px] left-1/2 top-0 w-[1920px]" data-node-id="1164:239" data-name="image 4">
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <HeroMuxBackground
-                hlsUrl={MUX_SECTION_BANNER_HLS_URL}
-                className="pointer-events-none absolute inset-0 h-full w-full object-cover transform-gpu"
-              />
+              {!isCoarsePointer ? (
+                <HeroMuxBackground
+                  hlsUrl={MUX_SECTION_BANNER_HLS_URL}
+                  className="pointer-events-none absolute inset-0 h-full w-full object-cover transform-gpu"
+                />
+              ) : (
+                <div className="absolute inset-0 bg-[#0a0a0a]" />
+              )}
             </div>
           </div>
           <div className="-translate-x-1/2 absolute bg-gradient-to-t from-[#0a0a0a] h-[600px] left-1/2 to-[rgba(10,10,10,0.5)] top-0 w-[1920px]" data-node-id="1165:440" data-name="image 5" />
@@ -529,7 +535,7 @@ export function FigmaResumeLayout({ onOpenCase }: FigmaResumeLayoutProps) {
           data-node-id="1136:272"
           data-name="Projects"
         >
-          <ProjectsSnowfall />
+          {!isCoarsePointer ? <ProjectsSnowfall /> : null}
           <div className="absolute h-[64px] left-[20px] top-[40px] w-[1880px]" data-node-id="1164:267" data-name="页眉">
             <div className="absolute h-[21px] left-[280px] top-0 w-[1600px]" data-node-id="1164:268" data-name="Union">
               <img alt="" className="absolute block inset-0 max-w-none size-full" src={imgUnion2} />
@@ -916,7 +922,7 @@ export function FigmaResumeLayout({ onOpenCase }: FigmaResumeLayoutProps) {
           <OtherWorksStackSection />
         </div>
         <div className="relative z-20 shrink-0 overflow-clip bg-[#0a0a0a] h-[923px] w-full" data-node-id="1136:392" data-name="底部">
-          <FooterWindParticles />
+          {!isCoarsePointer ? <FooterWindParticles /> : null}
           <div className="absolute h-[423px] left-[20px] top-[450px] w-[1880px]" data-node-id="1168:495">
             <div className="absolute bottom-0 h-[41px] left-0 overflow-clip w-[1880px]" data-node-id="1136:426" data-name="Footer">
               <div className="absolute font-['PingFang_SC:Regular',sans-serif] h-[22px] leading-[0] not-italic overflow-clip right-0 text-[16px] top-[18.39px] w-[266px]" data-node-id="1136:427" data-name="Credit">

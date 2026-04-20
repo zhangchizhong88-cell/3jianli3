@@ -1,5 +1,6 @@
 import { CopyToClipboard } from "./CopyToast";
 import { HeroMuxBackground } from "./HeroMuxBackground";
+import { useIsCoarsePointer } from "./useIsCoarsePointer";
 
 const videoHeroLoop = "/videos/hero-loop.mp4";
 const imgFrame =
@@ -15,6 +16,7 @@ const imgEllipse3 =
 
 /** 头图画布（设计坐标 1920×1100），随页面在 {@link ScaledViewport} 内自然滚动；顶栏见 {@link StickyHeroBrand} / {@link StickyHeroMenu} */
 export function HeroSection() {
+  const isCoarsePointer = useIsCoarsePointer();
   return (
     <div
       id="section-home"
@@ -25,7 +27,11 @@ export function HeroSection() {
       <div className="absolute h-[1100px] left-0 top-0 w-[1920px]" data-node-id="1136:81">
         <div aria-hidden="true" className="absolute inset-0 pointer-events-none">
           <div className="absolute inset-0 overflow-hidden">
-            <HeroMuxBackground className="pointer-events-none absolute inset-0 h-full w-full object-cover transform-gpu" />
+            {!isCoarsePointer ? (
+              <HeroMuxBackground className="pointer-events-none absolute inset-0 h-full w-full object-cover transform-gpu" />
+            ) : (
+              <div className="absolute inset-0 bg-[#0a0a0a]" />
+            )}
           </div>
           <div className="absolute bg-gradient-to-b from-[rgba(10,10,10,0)] inset-0 to-[#0a0a0a]" />
         </div>
